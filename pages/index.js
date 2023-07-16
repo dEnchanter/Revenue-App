@@ -109,8 +109,8 @@ export default function Home() {
               </div> 
 
               <div className='flex justify-between'>
-                <Link className='text-xs text-[#189FB8]' href="/register">Register?</Link>
-                <Link className='text-xs text-[#189FB8]' href="/forgotPassword">Forgot Password?</Link>
+                <Link className='text-xs text-[#189FB8]' href="">Register?</Link>
+                <Link className='text-xs text-[#189FB8]' href="">Forgot Password?</Link>
               </div>
 
               <div>
