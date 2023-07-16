@@ -7,6 +7,8 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
+        <div id="modal-root"></div>
+        <div id="snackbar-root"></div>
       </body>
     </Html>
   )

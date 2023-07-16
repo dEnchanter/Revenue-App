@@ -6,15 +6,10 @@ import Image from 'next/image'
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { doLoginSender, useUser } from '@/hooks/auth';
+import { doLoginSender } from '@/hooks/auth';
 import { Exclamation } from '@/components/Icons';
 
-export default function Home() {
-
-    const { mutateUser } = useUser({
-      redirectTo: "/enumerationDashboard",
-      redirectIfFound: true,
-    });
+export default function Register() {
 
     const router = useRouter();
 
@@ -27,20 +22,20 @@ export default function Home() {
     const [error, setError] = useState();
     const [loading, setLoading] = useState(false);
 
-    async function handleLogin(loginData) {
+    // async function handleLogin(loginData) {
       
-      try {
-        if (loginData) {
-          setLoading(true);
-          await mutateUser(doLoginSender(loginData));
-          router.push("/enumerationDashboard");
-        }
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    }
+    //   try {
+    //     if (loginData) {
+    //       setLoading(true);
+    //       await mutateUser(doLoginSender(loginData));
+    //       router.push("/EnumerationDashboard");
+    //     }
+    //   } catch (error) {
+    //     setError(error);
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // }
 
     return (
       <div className="bg-[#EBFBFE] p-10">
@@ -59,11 +54,14 @@ export default function Home() {
 
           <div className=''>
             <div className='text-center py-2 mb-8'>
-              <h1 className='text-2xl font-bold md:text-4xl'>Welcome back!</h1>
-              <h2 className='text-xs text-gray-500/80 md:text-sm'>Enter your credentials to access your account</h2>
+              <h1 className='text-2xl font-bold md:text-4xl'>Welcome to Revenue App!</h1>
+              <h2 className='text-xs text-gray-500/80 md:text-sm'>Enter your credentials to open an account</h2>
             </div>
 
-            <form className='space-y-5' onSubmit={handleSubmit(handleLogin)}>
+            <form 
+              className='space-y-5' 
+              // onSubmit={handleSubmit(handleLogin)}
+            >
                 {error?.fromLogin && (
                     <div className="opacity-75 text-orange-600 pb-4 font-semibold text-sm rounded-sm flex justify-start">
                       <p className="flex">
@@ -73,19 +71,55 @@ export default function Home() {
                     </div>
                 )}
               <div>
-                <Label htmlFor="email">Username</Label>
+                <Label htmlFor="first_name">First name</Label>
                 <TextInput
                   // autoComplete="autocomplete"
-                  name="username"
+                  name="first_name"
+                  padding="px-2 py-3"
+                  bg="bg-none"
+                  width="w-full md:w-[25rem]"
+                  type="text"
+                  {...register('first_name', { required: true })}
+                />
+                {errors.first_name && (
+                  <p className="p-1 text-[13px] font-light  text-orange-500">
+                    Please enter a valid first name.
+                  </p>
+                )}  
+              </div>
+
+              <div>
+                <Label htmlFor="last_name">Last name</Label>
+                <TextInput
+                  // autoComplete="autocomplete"
+                  name="last_name"
+                  padding="px-2 py-3"
+                  bg="bg-none"
+                  width="w-full md:w-[25rem]"
+                  type="text"
+                  {...register('last_name', { required: true })}
+                />
+                {errors.last_name && (
+                  <p className="p-1 text-[13px] font-light  text-orange-500">
+                    Please enter a valid last name.
+                  </p>
+                )}  
+              </div>
+
+              <div>
+                <Label htmlFor="email">Email</Label>
+                <TextInput
+                  // autoComplete="autocomplete"
+                  name="email"
                   padding="px-2 py-3"
                   bg="bg-none"
                   width="w-full md:w-[25rem]"
                   type="text"
                   {...register('email', { required: true })}
                 />
-                {errors.username && (
+                {errors.email && (
                   <p className="p-1 text-[13px] font-light  text-orange-500">
-                    Please enter a valid username.
+                    Please enter a valid email.
                   </p>
                 )}  
               </div>
@@ -108,9 +142,26 @@ export default function Home() {
                 )}
               </div> 
 
-              <div className='flex justify-between'>
-                <Link className='text-xs text-[#189FB8]' href="/register">Register?</Link>
-                <Link className='text-xs text-[#189FB8]' href="/forgotPassword">Forgot Password?</Link>
+              <div>
+                <Label htmlFor="phone_number">Password</Label>
+                <TextInput
+                  // autoComplete="autocomplete"
+                  name="Phone number"
+                  padding="px-2 py-3"
+                  bg="bg-none"
+                  type="text"
+                  width="w-full md:w-[25rem]"
+                  {...register('phone_number', { required: true })}
+                />
+                {errors.phone_number && (
+                  <p className="p-1 text-[13px] font-light  text-orange-500">
+                    provide a valid phone number.
+                  </p>
+                )}
+              </div> 
+
+              <div className='text-right'>
+                <Link className='text-xs text-[#189FB8]' href="/login">Back to login?</Link>
               </div>
 
               <div>

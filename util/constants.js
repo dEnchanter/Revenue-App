@@ -1,0 +1,27 @@
+export const Baseurl = "https://api.collections.com.ng/api";
+
+export const Endpoint = {
+  LOGIN: `auth/login`,
+  REGISTER: `auth/register`,
+  LOGOUT: `/auth/logout`,
+  USER: `auth/me`,
+  FETCH_OFFICERS: `/officers`,
+  FETCH_COMMUNITIES: `/communities`,
+  FETCH_WARDS: `/wards`,
+  FETCH_BUILDINGS: `/buildings`,
+  ALL_TIME_COUNTS: `/enumerated-dashboard/all-time-counts`,
+  LIVE_ACTIVITIES: `/enumerated-dashboard/live-activities`,
+  INCOME_CATEGORIES: `/enumerated-dashboard/top-income-categories`,
+  FETCH_INCOME_CATEGORIES: `/income-categories`,
+  POST_INCOME_CATEGORY: `/income-category`,
+  DELETE_INCOME_CATEGORY: `/income-category`,
+  FETCH_BUILDING_TYPES: `/building-types`,
+  POST_BUILDING: `/building`,
+  DELETE_BUILDING: `/building`,
+  POST_COMMUNITY: `/community`,
+  DELETE_COMMUNITY: `/community`,
+  POST_WARD: `/ward`,
+  DELETE_WARD: `/ward`,
+  POST_OFFICER: `/officer`,
+  DELETE_OFFICER: `/officer`,
+}
