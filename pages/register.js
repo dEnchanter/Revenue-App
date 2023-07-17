@@ -1,20 +1,37 @@
 import { Button } from '@/components/Button';
 import { Label } from '@/components/Label';
 import { TextInput } from '@/components/TextInput';
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import Image from 'next/image'
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { doLoginSender } from '@/hooks/auth';
 import { Exclamation } from '@/components/Icons';
+import { SmartSelect } from '@/components/SmartSelect';
+import { Baseurl, Endpoint } from '@/util/constants';
+import { toast } from 'react-hot-toast';
+import axios from 'axios';
 
 export default function Register() {
+
+    const role = [
+      // { value: "Officer", label: "Officer" },
+      { value: "Admin", label: "Admin" },
+      { value: "Viewer", label: "Viewer" },
+    ]
+
+    const gender = [
+      { value: "O", label: "O" },
+      { value: "M", label: "M" },
+      { value: "F", label: "F" },
+    ]
 
     const router = useRouter();
 
     const {
       register,
+      control,
       handleSubmit,
       formState: { errors },
     } = useForm();
@@ -22,20 +39,35 @@ export default function Register() {
     const [error, setError] = useState();
     const [loading, setLoading] = useState(false);
 
-    // async function handleLogin(loginData) {
+    async function handleLogin(data) {
+
+      const newData = {
+        first_name: data.first_name,
+        last_name: data.last_name,
+        email: data.email,
+        password: data.password,
+        phone_number: data.phone_number,
+        role: data.role.value,
+        gender: data.gender.value,
+      }
       
-    //   try {
-    //     if (loginData) {
-    //       setLoading(true);
-    //       await mutateUser(doLoginSender(loginData));
-    //       router.push("/EnumerationDashboard");
-    //     }
-    //   } catch (error) {
-    //     setError(error);
-    //   } finally {
-    //     setLoading(false);
-    //   }
-    // }
+      try {
+        if (newData) {
+          setLoading(true);
+
+          let response = await axios.post(`${Baseurl + "/" + Endpoint.REGISTER}`, newData)
+          let payload = response.data;
+          toast.success(payload.message);
+          router.push("/");
+
+        }
+      } catch (error) {
+        setError(error);
+        toast.error(error.message);
+      } finally {
+        setLoading(false);
+      }
+    }
 
     return (
       <div className="bg-[#EBFBFE] p-10">
@@ -59,17 +91,18 @@ export default function Register() {
             </div>
 
             <form 
-              className='space-y-5' 
-              // onSubmit={handleSubmit(handleLogin)}
+              className='space-y-2' 
+              onSubmit={handleSubmit(handleLogin)}
             >
-                {error?.fromLogin && (
-                    <div className="opacity-75 text-orange-600 pb-4 font-semibold text-sm rounded-sm flex justify-start">
-                      <p className="flex">
-                        <Exclamation h={"w-6"} />
-                      </p>
-                      <span className="ml-2 flex-grow">{error.message}</span>
-                    </div>
-                )}
+              {error?.fromLogin && (
+                <div className="opacity-75 text-orange-600 pb-4 font-semibold text-sm rounded-sm flex justify-start">
+                  <p className="flex">
+                    <Exclamation h={"w-6"} />
+                  </p>
+                  <span className="ml-2 flex-grow">{error.message}</span>
+                </div>
+              )}
+
               <div>
                 <Label htmlFor="first_name">First name</Label>
                 <TextInput
@@ -143,7 +176,7 @@ export default function Register() {
               </div> 
 
               <div>
-                <Label htmlFor="phone_number">Password</Label>
+                <Label htmlFor="phone_number">Phone Number</Label>
                 <TextInput
                   // autoComplete="autocomplete"
                   name="Phone number"
@@ -160,11 +193,57 @@ export default function Register() {
                 )}
               </div> 
 
-              <div className='text-right'>
-                <Link className='text-xs text-[#189FB8]' href="/login">Back to login?</Link>
+              <div className="md:w-[25rem]">
+                <Label htmlFor="role" required>
+                  Select Role
+                </Label>
+                <Controller
+                  name="role"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                  <SmartSelect 
+                    placeholder="Role..."
+                    options={role || []}
+                    loading={!role}
+                    // className="w-[2rem]"
+                    {...field}
+                  />
+                )}
+                />
+                {errors.role && (
+                  <FieldError>Role is required</FieldError>
+                )}
               </div>
 
-              <div>
+              <div className="md:w-[25rem]">
+                <Label htmlFor="gender" required>
+                  Select Gender
+                </Label>
+                <Controller
+                  name="gender"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                  <SmartSelect 
+                    placeholder="Gender..."
+                    options={gender || []}
+                    loading={!gender}
+                    // className="w-[2rem]"
+                    {...field}
+                  />
+                )}
+                />
+                {errors.role && (
+                  <FieldError>Role is required</FieldError>
+                )}
+              </div>
+
+              <div className='text-right md:mr-[3rem]'>
+                <Link className='text-xs text-[#189FB8]' href="/">Back to login?</Link>
+              </div>
+
+              <div className='md:mr-10'>
                 <Button
                   type="submit"
                   width="w-full"
@@ -173,7 +252,7 @@ export default function Register() {
                   font="font-semibold text-gray-50"
                   loading={loading}
                 >
-                  Login
+                  Sign Up
                 </Button>
               </div>  
             </form>
