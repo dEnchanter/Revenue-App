@@ -185,7 +185,7 @@ export default function Page() {
         <SideBar />
       </div>
 
-      <div className="min-h-screen flex-1 max-w-5xl lg:max-w-7xl mx-auto">
+      <div className="min-h-screen flex-1 max-w-5xl mx-auto">
       <ConfirmModal {...confirmProps} />
 
       {/* User Holder */}

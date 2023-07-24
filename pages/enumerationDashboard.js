@@ -168,7 +168,7 @@ export default function Page() {
         <SideBar />
       </div>
 
-      <div className="min-h-screen flex-1 max-w-5xl lg:max-w-7xl mx-auto">
+      <div className="min-h-screen flex-1 max-w-5xl mx-auto">
         {/* User Holder */}
         <div className="flex items-center justify-end p-5">
           <UserCircleIcon className="w-10 h-10" />
