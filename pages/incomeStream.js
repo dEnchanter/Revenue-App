@@ -181,7 +181,7 @@ export default function Page() {
   
   return (
     <div className="flex">
-      <div className='bg-[#EBFBFE] max-w-[10rem] sm:max-w-xs h-screen sticky top-0 overflow-y-auto md:min-w-[15rem]'>
+      <div className='bg-[#EBFBFE] max-w-[13rem] h-screen sticky top-0 overflow-y-auto'>
         <SideBar />
       </div>
 
