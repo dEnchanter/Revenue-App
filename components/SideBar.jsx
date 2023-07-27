@@ -39,7 +39,7 @@ function SideBar() {
   return (
     <div className="p-2 flex flex-col h-screen">
       <div className="flex-1">
-        <div>
+        <div className=''>
           <div className="flex flex-col space-y-2 my-2">
 
             <div className="flex justify-between mb-10">
@@ -72,7 +72,7 @@ function SideBar() {
 
           </div>
 
-            <div className="flex justify-between items-center mt-[4rem] space-x-5 px-2 cursor-pointer">
+            <div className="flex justify-between items-center mt-[3rem] mb-[4rem] space-x-5 px-2 cursor-pointer">
               <div>
                 <Image src="/logout.png" alt="logo" width="15" height="15" className="object-contain" />
               </div>

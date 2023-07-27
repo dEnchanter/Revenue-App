@@ -229,7 +229,7 @@ export default function Page() {
    
   return (
     <div className="flex">
-      <div className="bg-[#EBFBFE] max-w-[13rem] h-screen sticky top-0 overflow-y-auto">
+      <div className="bg-[#EBFBFE] max-w-[13rem] h-screen sticky top-0 overflow-y-auto scrollbar-thin scrollbar-thumb-[#095D52]/10">
         <SideBar />
       </div>
 

@@ -164,7 +164,7 @@ export default function Page() {
   return (
     <div className="flex">
 
-      <div className='bg-[#EBFBFE] max-w-[13rem] h-screen sticky top-0 overflow-y-auto'>
+      <div className='bg-[#EBFBFE] max-w-[13rem] h-screen sticky top-0 overflow-y-auto scrollbar-thin scrollbar-thumb-[#095D52]/10'>
         <SideBar />
       </div>
 
@@ -232,7 +232,7 @@ function LineActivity({ liveActivityData }) {
   return (
     <div className="py-10">
       <p className="text-xs text-[#666666]">Live Activities</p>
-      <div className="border border-1 border-[#189FB8]/30 h-[30rem] overflow-y-auto overflow-hidden">
+      <div className="border border-1 border-[#189FB8]/30 h-[30rem] overflow-y-auto scrollbar-thin scrollbar-thumb-[#095D52]/10">
         {
           liveActivityData?.map((activity, index) => (
             <CustomCard 
