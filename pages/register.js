@@ -63,7 +63,7 @@ export default function Register() {
         }
       } catch (error) {
         setError(error);
-        toast.error(error.message);
+        toast.error("The email has already been taken.");
       } finally {
         setLoading(false);
       }

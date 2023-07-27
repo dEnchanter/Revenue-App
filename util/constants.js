@@ -5,6 +5,8 @@ export const Endpoint = {
   REGISTER: `auth/register`,
   LOGOUT: `/auth/logout`,
   USER: `auth/me`,
+  FORGOT_PASSWORD: `auth/forgot-password`,
+  RESET_PASSWORD: `auth/reset-password`,
   FETCH_OFFICERS: `/officers`,
   FETCH_COMMUNITIES: `/communities`,
   FETCH_WARDS: `/wards`,
